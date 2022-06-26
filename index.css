@@ -19,6 +19,15 @@ label {
     display: block;
 }
 
+dl {
+    padding: 1rem;
+}
+/* This makes change to the "Immediate" child element, if another element is 
+wrapped around the child element. The change will not be made.*/
 dl > li {
     list-style: none;
+}
+
+dl:nth-of-type(even) {
+    background-color: #ffcddd;
 }
