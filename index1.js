@@ -1,5 +1,5 @@
 const form = document.querySelector('#userForm')
-// This function creates a div name colorDiv that stores the color the use selected
+
 const renderColor = function(color) {
     const colorDiv = document.createElement('div')
     colorDiv.style.backgroundColor = color
@@ -8,53 +8,57 @@ const renderColor = function(color) {
     return colorDiv
 }
 
-// This function create the list items and uses a try catch statement to add elements that
-// cause error when ran 
+
 const renderListItem = function(label, value) {
     const item = document.createElement('li')
-    item.textContent = `${label}: `
+    const term = document.createElement('dt')
+    item.textContent = label
+
+    const description = document.createElement('dd')
+    
     try {
-        item.appendChild(value)
-    } catch(e) {
-        item.textContent += value
+        description.appendChild(value)
+    }catch(e) {
+        description.textContent += value
     }
+    item.appendChild(term)
+    item.appendChild(description)
     return item
 }
 
+const renderList = function(data) {
+    const list = document.createElement('dl')
+    const labels = Object.keys(data)
+    labels.forEach(function(label){
+        const item = renderListItem(label, data[label])
+        list.appendChild(item)
+    })
+    return list
+}
+
 const handleSubmit = function(ev) {
-    
     ev.preventDefault()
+    
     const f = ev.target
-    // This creates an object name 'user' with the keys and values of the username, age and favorite color
+
     const user = {
         username: f.userYame.value,
-        Age: f.age.value,
+        age: f.age.value,
         favoritecolor: renderColor(f.favoriteColor.value),
     }
-    
-       
 
-    const list = document.createElement('ul')
-
-    // This variable stores the keys for the user object
-    const labels = Object.keys(user)
-
-    // This loop loops through the labels variable and puts each label in the renderListIten function 
-    // and appends its to the list variable as a child
-    labels.forEach(function(label){
-      const item = renderListItem(label, user[label])
-      list.appendChild(item)
-    })
-   
-    
-    
     const users = document.querySelector('#users')
-    users.appendChild(list)
-    
-    
+    users.appendChild(renderList(user))
+
     f.reset()
     f.userYame.focus()
+
+
     
+
+
+
 }
 
 form.addEventListener('submit', handleSubmit)
+
