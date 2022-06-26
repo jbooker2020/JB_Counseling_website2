@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Smooch&display=swap');
+
+body {
+    font-family: 'Smooch', cursive;
+}
+
+main {
+    display: flex;
+    justify-content: space-around;
+}
